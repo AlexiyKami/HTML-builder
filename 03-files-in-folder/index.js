@@ -8,7 +8,7 @@ async function readFolder() {
     fs.stat(path.join(__dirname, 'secret-folder', file),(err, stats) => {
       if (err) throw err;
       if (stats.isFile()) {
-        console.log(file.replace('.', ' - ') + ' - ' + stats.size + 'b');
+        console.log(path.basename(path.join(__dirname, 'secret-folder', file), path.extname(file)) + ' - ' + path.extname(file).substring(1) + ' - ' + stats.size + 'b');
       }
     })
   }
