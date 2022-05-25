@@ -8,11 +8,11 @@ fs.writeFile(bundlePath, '', (err) => {
 
 fs.readdir(path.join(__dirname, 'styles'), (err, files) => {
   if (err) throw err;
-  files = files.filter((value) => value.substring(value.length-3) === 'css');
+  files = files.filter((value) => path.extname(value) === '.css');
   for (let file of files) {
     const readStream = fs.createReadStream(path.join(__dirname, 'styles', file));
     readStream.on('data', (chunk) => {
-      fs.appendFile(bundlePath, chunk, (err) => {
+      fs.appendFile(bundlePath, chunk + '\n', (err) => {
         if (err) throw err;
       });
     })
